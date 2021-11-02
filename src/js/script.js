@@ -139,12 +139,13 @@
           // check if the option is not default
             if(!option.default) {
             // add option price to price variable
-              price = price + option.price; }
+              price += option.price; }
+            console.log('option.price: ', option.price);
           } else {
           // check if the option is default
             if(option.default) {
             // reduce price variable
-              price = price - option.default;
+              price -= option.price;
             }
           }
         }
