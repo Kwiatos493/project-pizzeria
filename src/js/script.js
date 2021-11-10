@@ -90,7 +90,7 @@
     initAmountWidget(){
       const thisProduct = this;
 
-      thisProduct.AmountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       thisProduct.amountWidgetElem.addEventListener('updated', () => {
         thisProduct.processOrder();
       });
@@ -188,7 +188,7 @@
         }
       }
       //nie mam pojęcia czemu po dodaniu tego wyrzuca mi błąd cannot read value :<
-      price *= thisProduct.AmountWidget.value;
+      price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
   }
