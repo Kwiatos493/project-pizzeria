@@ -188,7 +188,7 @@
         }
       }
       //nie mam pojęcia czemu po dodaniu tego wyrzuca mi błąd cannot read value :<
-      //price *= thisProduct.amountWidget.value;
+      price *= thisProduct.AmountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
   }
