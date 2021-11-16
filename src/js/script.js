@@ -113,14 +113,13 @@
     getElements(){
       const thisProduct = this;
 
-      thisProduct.dom = {};
-      thisProduct.dom.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      thisProduct.dom.form = thisProduct.element.querySelector(select.menuProduct.form);
-      thisProduct.dom.formInputs = thisProduct.dom.form.querySelectorAll(select.all.formInputs);
-      thisProduct.dom.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-      thisProduct.dom.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-      thisProduct.dom.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      thisProduct.dom.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     initAmountWidget(){
       const thisProduct = this;
@@ -292,15 +291,15 @@
       const thisCart = this;
       thisCart.products = [];
       thisCart.getElements(element);
+      thisCart.initActions();
       console.log('new Cart', thisCart);
     }
 
     getElements(element){
       const thisCart = this;
 
-      thisCart.dom = {};
-      thisCart.dom.wrapper = element;
-      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.wrapper = element;
+      thisCart.toggleTrigger = thisCart.wrapper.querySelector(select.cart.toggleTrigger);
     }
     
     initActions(){
