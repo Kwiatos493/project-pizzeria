@@ -223,11 +223,47 @@
         }
       }
       price *= thisProduct.amountWidget.value;
+      thisProduct.priceSingle = price;
       thisProduct.priceElem.innerHTML = price;
     }
     addToCart(){
       const thisProduct = this;
-      app.cart.add(thisProduct);
+      app.cart.add(thisProduct.prepareCartProduct());
+      
+    }
+    prepareCartProduct(){
+      const thisProduct = this;
+
+      const productSummary = {
+        name: thisProduct.data.name,
+        id: thisProduct.id,
+        amount: thisProduct.amountWidget.value,
+        priceSingle: thisProduct.priceSingle,
+        price: thisProduct.priceElem.innerHTML,
+      };
+      productSummary.params = thisProduct.prepareCartProductParams();
+      return productSummary;
+    }
+    prepareCartProductParams(){
+      const thisProduct = this;
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      const params = {};
+      for(let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+        params[paramId] = {
+          label: param.label,
+          options: {}
+        };
+        for(let optionId in param.options) {
+          const option  = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if(optionSelected){
+            // option is selected!
+            params[paramId].options[optionId] = option.label;
+          }
+        }
+      }
+      return params;
     }
   }
 
@@ -300,6 +336,7 @@
 
       thisCart.wrapper = element;
       thisCart.toggleTrigger = thisCart.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.productList = document.querySelector(select.cart.productList);
     }
     
     initActions(){
@@ -311,7 +348,11 @@
       });
     }
     add(menuProduct){
-      // const thisCart = this;
+      const thisCart = this;
+
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generated = utils.createDOMFromHTML(generatedHTML);
+      thisCart.productList.appendChild(generated);
 
       console.log('adding product', menuProduct);
     }
