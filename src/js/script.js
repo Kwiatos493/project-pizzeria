@@ -353,8 +353,38 @@
       const generatedHTML = templates.cartProduct(menuProduct);
       const generated = utils.createDOMFromHTML(generatedHTML);
       thisCart.productList.appendChild(generated);
+      thisCart.products.push(new CartProduct(menuProduct, generated));
 
       console.log('adding product', menuProduct);
+    }
+  }
+
+  class CartProduct{
+    constructor(menuProduct, element){
+      const thisCartProduct = this;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.id = menuProduct.id;
+
+      thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget();
+    }
+    getElements(element){
+      const thisCartProduct = this;
+      thisCartProduct.wrapper = element;
+      thisCartProduct.amountWidget = element.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.price = element.querySelector(select.cartProduct.price);
+      thisCartProduct.edit = element.querySelector(select.cartProduct.edit);
+      thisCartProduct.remove = element.querySelector(select.cartProduct.remove);
+    }
+    initAmountWidget(){
+      const thisCartProduct = this;
+
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidget);
+      thisCartProduct.amountWidget.addEventListener('updated', function()
+      {
+        thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amountWidget.value;
+        thisCartProduct.price.innerHTML = thisCartProduct.price;
+      });
     }
   }
 
