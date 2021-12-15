@@ -74,7 +74,6 @@ export const classNames = {
     wrapperActive: 'active',
     imageVisible: 'active',
   },
-  // CODE ADDED START
   cart: {
     wrapperActive: 'active',
   },
@@ -88,12 +87,13 @@ export const classNames = {
   pages: {
     active: 'active',
   }
-  // CODE ADDED END
 };
-
+  
 export const settings = {
   db: {
     url: '//localhost:3131',
+    products: 'products',
+    orders: 'orders',
     product: 'product',
     order: 'order',
     booking: 'booking',
@@ -124,11 +124,11 @@ export const settings = {
     tableIdAttribute: 'data-table',
   },
 };
-
+  
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   // CODE ADDED START
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
   // CODE ADDED END
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
 };

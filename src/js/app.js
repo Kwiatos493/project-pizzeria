@@ -104,10 +104,9 @@ const app = {
     console.log('templates:', templates);
 
     thisApp.initPages();
-
     thisApp.initData();
+    thisApp.initCart();
   },
 };
 
 app.init();
-app.initCart();
