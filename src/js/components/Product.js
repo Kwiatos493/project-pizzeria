@@ -1,4 +1,4 @@
-import { classNames, select, templates } from '../settings.js';
+import {select, classNames, templates} from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 
@@ -36,14 +36,6 @@ class Product {
     thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
     thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
-  }
-  initAmountWidget() {
-    const thisProduct = this;
-
-    thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-    thisProduct.amountWidgetElem.addEventListener('updated', () => {
-      thisProduct.processOrder();
-    });
   }
   initAccordion() {
     const thisProduct = this;
@@ -130,17 +122,23 @@ class Product {
             price += option.price;
           }
           // check if the option is default
-        } else {
-          if (option.default) {
-            // reduce price variable
-            price -= option.price;
-          }
+        } else if (option.default) { 
+          // reduce price variable
+          price -= option.price;
         }
       }
     }
     price *= thisProduct.amountWidget.value;
     thisProduct.priceElem.innerHTML = price;
     thisProduct.priceSingle = price;
+  }
+  initAmountWidget() {
+    const thisProduct = this;
+
+    thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    thisProduct.amountWidgetElem.addEventListener('updated', () => {
+      thisProduct.processOrder();
+    });
   }
   addToCart() {
     const thisProduct = this;
@@ -149,7 +147,7 @@ class Product {
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
       detail: {
-        product: thisProduct,
+        product: thisProduct.prepareCartProduct(),
       },
     });
 
