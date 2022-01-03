@@ -188,6 +188,8 @@
         opacity: 0.4;
       }
     }
+    &.selected {
+      background-color: orangered;
   }
 
   [data-table="1"] {
